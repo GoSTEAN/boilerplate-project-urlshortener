@@ -1,7 +1,20 @@
-require('dotenv').config();
+// require('dotenv').config({ path: 'sample.env' });
+require('dotenv').config({ path: 'sample.env' });
+
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
 const app = express();
+
+console.log('MONGO_URI:', process.env.MONGO_URI); // Debugging: Log the MongoDB URI to ensure it's being loaded
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true, useUnifiedTopology: true
+})
+
+
+
 
 // Basic Configuration
 const port = process.env.PORT || 3000;
@@ -15,7 +28,7 @@ app.get('/', function(req, res) {
 });
 
 // Your first API endpoint
-app.get('/api/hello', function(req, res) {
+app.get('/api/shorturl', function(req, res) {
   res.json({ greeting: 'hello API' });
 });
 
